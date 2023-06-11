@@ -1,20 +1,34 @@
-import React, { Fragment ,useContext } from 'react';
+import React, { Fragment} from 'react';
 import './Create.css';
 import Header from '../Header/Header';
 import { useState } from 'react';
 import { FirebaseContext ,authContext } from "../../store/Context";
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Create = () => {
-  const {firebase} = ()=>useContext(FirebaseContext)
+  const {firebase} =useContext(FirebaseContext)
   const {user} = useContext(authContext)
+  const history = useHistory()
   const [name, setname] = useState('')
   const [price, setprice] = useState('')
-  const [categoty, setcategoty] = useState('')
+  const [category, setcategory] = useState('')
   const [image, setimage] = useState(null)
+
   const handleSubmit =()=>{
-      firebase.storage().ref(`/image/${image.name}`).put(image).then(({ref})=>{
+    const date = new Date();
+       firebase.storage().ref(`/image/${image.name}`).put(image).then(({ref})=>{
         ref.getDownloadURL().then((url)=>{
-          console.log(url);
+          console.log(url);   
+          firebase.firestore().collection('products').add({
+            name,
+            category,
+            price,
+            url,
+            userId:user.uid,
+            createdAt: date.toDateString(),
+          })
+          history.push('/')
         })
       })
   }
@@ -33,7 +47,7 @@ const Create = () => {
               value={name}
               onChange={(e)=>setname(e.target.value)}
               id="fname"
-              name="Name"
+              name="name"
               defaultValue="John"
             />
             <br />
@@ -42,8 +56,8 @@ const Create = () => {
             <input
               className="input"
               type="text"
-              value={categoty}
-              onChange={(e)=>setcategoty(e.target.value)}
+              value={category}
+              onChange={(e)=>setcategory(e.target.value)}
               id="fname"
               name="category"
               defaultValue="John"
@@ -63,7 +77,7 @@ const Create = () => {
               setimage(e.target.files[0])
             }} type="file" />
             <br />
-            <button onclick={handleSubmit} className="uploadBtn">upload and Submit</button>
+            <input onClick={handleSubmit} type="button" className="uploadBtn" value='upload and Submit' />
          
         </div>
       </card>

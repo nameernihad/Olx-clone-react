@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import Heart from '../../assets/Heart';
 import './Post.css';
 
 function Posts() {
-
+//   useEffect(() => {
+//     first
+  
+//     return () => {
+//       second
+//     }
+//   }, [third])
+//   const first = useContext(second)
   return (
+    
     <div className="postParentDiv">
       <div className="moreView">
         <div className="heading">
