@@ -2,8 +2,11 @@ import React,{useEffect , useContext} from 'react';
 import { BrowserRouter as Router,Route } from "react-router-dom";
 import Signup from "./Pages/Signup"
 import Login from './Pages/Login'
-import { FirebaseContext, authContext } from "./store/Context";
 import Create from './Pages/Create';
+import View from './Pages/ViewPost'
+import { FirebaseContext, authContext } from "./store/Context";
+import { Post } from "./store/PostContext";
+
 import './App.css';
 
 /**
@@ -23,6 +26,7 @@ function App() {
 
   return (
     <div>
+<Post>
       <Router>
         <Route exact path='/' >
           <Home />
@@ -36,7 +40,11 @@ function App() {
         <Route  path='/create' >
           <Create />
         </Route>
+        <Route  path='/view' >
+          <View />
+        </Route>
       </Router>
+</Post>
     </div>
   );
 }

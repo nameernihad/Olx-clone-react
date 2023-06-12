@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import './View.css';
+import { postContext } from '../../store/PostContext';
+import { fireEvent } from '@testing-library/react';
+import { FirebaseContext } from '../../store/Context';
 function View() {
+  const [userDetails, setuserDetails] = useState()
+  const {postDetails} = useContext(postContext)
+  const {firebase} = useContext(FirebaseContext)
+  // useEffect(()=>{
+  //   firebase.firestore().collection
+  // })
+
   return (
     <div className="viewParentDiv">
       <div className="imageShowDiv">
