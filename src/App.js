@@ -5,8 +5,7 @@ import Login from './Pages/Login'
 import Create from './Pages/Create';
 import View from './Pages/ViewPost'
 import { FirebaseContext, authContext } from "./store/Context";
-import { Post } from "./store/PostContext";
-
+import  Post  from "./store/PostContext";
 import './App.css';
 
 /**
@@ -23,7 +22,7 @@ function App() {
     })
   })
   
-
+ 
   return (
     <div>
 <Post>

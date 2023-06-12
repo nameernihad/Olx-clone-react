@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 function Posts() {
   const {firebase} = useContext(FirebaseContext)
   const [products, setproducts] = useState([])
-  const {setPostDetails} = useContext(postContext)
+  const {setpostDetails} = useContext(postContext)
   const history = useHistory()
   useEffect(() => {
   
@@ -42,7 +42,8 @@ function Posts() {
           return  <div
             className="card"
             onClick={()=>{
-              setPostDetails(product)
+          
+              setpostDetails(product)
               history.push('/view')
             }}
           >
